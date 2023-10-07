@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>数据库监控 - 测试</title>
+    <link rel="icon" href="" sizes="16x16">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="stylesheet" href="sdk.css" />
+    <link rel="stylesheet" href="helper.css" />
+    <link rel="stylesheet" href="iconfont.css" />
+    <!-- 从 1.1.0 开始 sdk.css 将不支持 IE 11，如果要支持 IE11 请引用这个 css，并把前面那个删了 -->
+    <!-- <link rel="stylesheet" href="sdk-ie11.css" /> -->
+    <!-- 不过 amis 开发团队几乎没测试过 IE 11 下的效果，所以可能有细节功能用不了，如果发现请报 issue -->
+    <style>
+      html,
+      body,
+      .app-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" class="app-wrapper"></div>
+    <script src="sdk.js"></script>
+    <script type="text/javascript">
+      (function () {
+        let amis = amisRequire('amis/embed');
+        // 通过替换下面这个配置来生成不同页面
+        let amisJSON = {
+  "type": "page",
+  "title": "数据库监控",
+  "body": [
+    {
+      "type": "grid",
+      "columns": [
+        {
+          "type":"flex",
+          "direction": "column",
+          "items": [
+            {
+            "type": "service",
+            "api": "http://10.1.0.223:8000/time",
+            "body": {
+              "type": "panel",
+              "body": "${time1}",
+              "header": {
+                "label": "QYT02库POS表最新数据时间",
+                "type": "button",
+                "level": "link",
+                "actionType": "link",
+                "link": "../QYT02库POS表最新数据时间.html"
+                },
+              }
+            },
+            {
+            "type": "service",
+            "api": "http://10.1.0.223:8000/time",
+            "body": {
+              "type": "panel",
+              "body": "${time2}",
+              "header": {
+                "label": "med库POS表最新数据时间",
+                "type": "button",
+                "level": "link",
+                "actionType": "link",
+                "link": "../med库POS表最新数据时间.html"
+                },
+              }
+            }
+          ]
+        },
+        {
+          "type": "chart",
+          "api": "http://10.1.0.223:8000/line1",
+        },
+        {
+          "type": "chart",
+          "api": "http://10.1.0.223:8000/line2",
+        }
+      ]
+    },
+    {
+      "type": "grid",
+      "columns": [
+        {
+          "type": "crud",
+          "api": "http://10.1.0.223:8000/crud1",
+          "headerToolbar": [
+            {"label": "QYT02库任务运行情况",
+            "type": "button",
+            "level": "link",
+            "actionType": "link",
+            "link": "../QYT02库任务运行情况.html"
+            }
+          ],
+          "perPage": 5,
+          "keepItemSelectionOnPageChange": true,
+          "syncLocation": false,
+          "columns": [
+            {
+              "name":"报告",
+              "label":"报告",
+              "sortable": true
+            },
+            {
+              "name":"状态",
+              "label":"状态",
+              "sortable": true
+            },
+            {
+              "name":"开始时间",
+              "label":"开始时间",
+              "sortable": true
+            },
+            {
+              "name":"结束时间",
+              "label":"结束时间",
+              "sortable": true
+            },
+            {
+              "name":"备注",
+              "label":"备注"
+            }
+          ]
+        },
+        {
+          "type": "crud",
+          "api": "http://10.1.0.223:8000/crud2",
+          "headerToolbar": [
+            {"label": "med库任务运行情况",
+            "type": "button",
+            "level": "link",
+            "actionType": "link",
+            "link": "../med库任务运行情况.html"
+            }
+          ],
+          "perPage": 5,
+          "syncLocation": false,
+          "columns": [
+            {
+              "name":"报告",
+              "label":"报告",
+              "sortable": true
+            },
+            {
+              "name":"状态",
+              "label":"状态",
+              "sortable": true
+            },
+            {
+              "name":"开始时间",
+              "label":"开始时间",
+              "sortable": true
+            },
+            {
+              "name":"结束时间",
+              "label":"结束时间",
+              "sortable": true
+            },
+            {
+              "name":"备注",
+              "label":"备注"
+            }
+          ]
+        },
+        {
+          "type": "crud",
+          "api": "http://10.1.0.223:8000/crud3",
+          "headerToolbar": [
+            {"label": "med02库任务运行情况",
+            "type": "button",
+            "level": "link",
+            "actionType": "link",
+            "link": "../med02库任务运行情况.html"
+            }
+          ],
+          "perPage": 3,
+          "syncLocation": false,
+          "columns": [
+            {
+              "name":"报告",
+              "label":"报告",
+              "sortable": true
+            },
+            {
+              "name":"创建时间",
+              "label":"创建时间",
+              "sortable": true
+            },
+            {
+              "name":"报告类型",
+              "label":"报告类型",
+              "sortable": true
+            },
+            {
+              "name":"状态",
+              "label":"状态",
+              "sortable": true
+            },
+            {
+              "name":"备注",
+              "label":"备注"
+            }
+          ]
+        },
+        {
+          "type": "crud",
+          "api": "http://10.1.0.223:8000/crud4",
+          "headerToolbar": [
+            {"label": "qyt_test任务执行情况",
+            "type": "button",
+            "level": "link",
+            "actionType": "link",
+            "link": "../qyt_test任务执行情况.html"
+            }
+          ],
+          "perPage": 5,
+          "syncLocation": false,
+          "columns": [
+            {
+              "name":"报告",
+              "label":"报告",
+              "sortable": true
+            },
+            {
+              "name":"状态",
+              "label":"状态",
+              "sortable": true
+            },
+            {
+              "name":"开始时间",
+              "label":"开始时间",
+              "sortable": true
+            },
+            {
+              "name":"结束时间",
+              "label":"结束时间",
+              "sortable": true
+            },
+            {
+              "name":"备注",
+              "label":"备注"
+            }
+          ]
+        },
+        {
+          "type": "crud",
+          "api": "http://10.1.0.223:8000/crud5",
+          "headerToolbar": [
+            {"label": "泉源堂跑报告情况",
+            "type": "button",
+            "level": "link",
+            "actionType": "link",
+            "link": "../泉源堂跑报告情况.html"
+            }
+          ],
+          "perPage": 5,
+          "syncLocation": false,
+          "columns": [
+          {
+              "name":"报告",
+              "label":"报告",
+              "sortable": true
+            },
+            {
+              "name":"创建时间",
+              "label":"创建时间",
+              "sortable": true
+            },
+            {
+              "name":"报告类型",
+              "label":"报告类型",
+              "sortable": true
+            },
+            {
+              "name":"状态",
+              "label":"状态",
+              "sortable": true
+            },
+            {
+              "name":"备注",
+              "label":"备注"
+            }
+          ]
+        },
+        {
+          "type": "crud",
+          "api": "http://10.1.0.223:8000/crud6",
+          "headerToolbar": [
+            {"label": "pybee执行情况",
+            "type": "button",
+            "level": "link",
+            "actionType": "link",
+            "link": "../pybee执行情况.html"
+            }
+          ],
+          "perPage": 5,
+          "syncLocation": false,
+          "columns": [
+            {
+              "name":"任务",
+              "label":"任务",
+              "sortable": true
+            },
+            {
+              "name":"开始时间",
+              "label":"开始时间",
+              "sortable": true
+            },
+            {
+              "name":"结束时间",
+              "label":"结束时间",
+              "sortable": true
+            },
+            {
+              "name":"时长",
+              "label":"时长"
+            },
+            {
+              "name":"状态",
+              "label":"状态",
+              "sortable": true
+            },
+            {
+              "name":"错误信息",
+              "label":"错误信息"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+        let amisScoped = amis.embed('#root', amisJSON);
+      })();
+    </script>
+  </body>
+</html>
